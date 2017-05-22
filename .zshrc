@@ -7,8 +7,15 @@ export ZSH=/Users/chriswalter/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
 
+# optionally set DEFAULT_USER in ~/.zshrc to your regular username to hide the “user@hostname” info when you’re logged in as yourself on your local machine.
+DEFAULT_USER="$USER"
+
+# redefine prompt_context for hiding user@hostname
+prompt_context () { }
+
+
 # Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
+# CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -30,7 +37,7 @@ CASE_SENSITIVE="true"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -49,15 +56,22 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, osx, bower, brew, common-aliases, dirhistory, git-extras, npm, pip, python, taskwarrior, vagrant, gulp)
+plugins=(git, npm, gulp, bower)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Users/chriswalter/.rvm/bin:/Users/chriswalter/.vim/plugged/fzf/bin"
+# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# use nvm plugin
+plugins+=(zsh-nvm)
+
+
 source $ZSH/oh-my-zsh.sh
+
+# powerline fonts for agnoster theme
 source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -82,5 +96,7 @@ source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.z
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias reset-vpn="sudo ifconfig en0 down; sudo route flush; sudo ifconfig en0 up"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
